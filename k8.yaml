@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kinara-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kinara-app
+  template:
+    metadata:
+      labels:
+        app: kinara-app
+    spec:
+      containers:
+        - name: kinara-backend
+          image: 339712924887.dkr.ecr.us-east-1.amazonaws.com/kinaradocker:v1
+          command: ["printenv"]
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kinara-service
+spec:
+  selector:
+    app: kinara-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer
