@@ -41,8 +41,6 @@ public class StudentServiceImpl implements StudentServiceInterface {
            String classRoomName = studentFilterTemplate.getClassName();
            Long rollNumber = studentFilterTemplate.getSearchByRollNumber();
 
-           if(false)
-               classRoom = classService.getClassRoom(classRoomName);
 
            // -------------------------- Configuring pagination object with either default values or custom values -----------------------------
            Pageable pageable = PageRequest.of(pageNumber, pageSize)
@@ -55,10 +53,7 @@ public class StudentServiceImpl implements StudentServiceInterface {
 
            return new StudentResponse(studentPages.getContent(), studentPages.getTotalPages());
 
-       }catch(BadRequestException e){
-           e.printStackTrace();
-           throw new BadRequestException(e.getMessage());
-       }catch (Exception e){
+       } catch (Exception e){
            e.printStackTrace();
            throw new DefaultException("Something went wrong, Please try again later");
        }
