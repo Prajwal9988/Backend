@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: kinara-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: kinara-app
@@ -12,10 +12,10 @@ spec:
       labels:
         app: kinara-app
     spec:
+      restartPolicy : Always
       containers:
         - name: kinara-backend
-          image: 339712924887.dkr.ecr.us-east-1.amazonaws.com/kinaradocker:v1
-          command: ["printenv"]
+          image: 339712924887.dkr.ecr.us-east-1.amazonaws.com/kinaradocker:latest
           ports:
             - containerPort: 5000
 ---
